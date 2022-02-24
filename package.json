@@ -1,0 +1,25 @@
+{
+  "name": "typescriptcataline",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node-dev --respawn --quiet --clear ./src/main.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RuizLuiz/TypeScriptCataline.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RuizLuiz/TypeScriptCataline/issues"
+  },
+  "homepage": "https://github.com/RuizLuiz/TypeScriptCataline#readme",
+  "devDependencies": {
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.5"
+  }
+}
