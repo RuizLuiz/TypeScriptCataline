@@ -1,122 +1,80 @@
-//string
+// interface and an optional property 
 
-let message: string = "Hello World"
+type UF = 'AM' | 'RJ' | 'MG'
 
-message = message.toUpperCase()
-
-console.log(message)
-
-//number
-
-let total: number 
-
-total = 0
-
-console.log(total)
-
-// boolean 
-
-let isOpen: boolean
-
-isOpen = false
-
-console.log(isOpen)
-
-//any
-
-let stock: any = 89
-
-stock = null
-
-console.log(stock)
-
-// void
-
-let stock2: void = undefined
-
-console.log(stock2)
-
-function showInformation(): void{
-    console.log('cataline')
+interface User {
+    name: string, 
+    address?: { // optional property 
+        city: string 
+        UF: UF
+    }
+    sayHello: () => void
 }
 
-showInformation()
+let users :User[] // array of users
 
-// never
-
-function error(): never{
-    throw new Error('error')
+function showCity(user: User) {
+    user.sayHello = () => console.log('cataline') // testing function void
+    user.address ? user.address.UF = 'AM' : 'no exist'// testing add of a UF already defined
+    let myCity = user.address?.city // if city no exist MyCity will be undefined
+    return user.address ? user.address.city : 'no exist' // testing if address exists
 }
 
-// array 
+// readonly property 
 
-let items: Array<number>
-
-items = [1, 2, 3, 4]
-
-console.log(items)
-
-let items2: string[]
-
-items2 = ['luiz','ruiz']
-
-console.log(items2)
-
-//tuple
-
-let items3: [number, string, boolean]
-
-items3 = [1, 'luiz', true]
-
-console.log(items3)
-
-//enum
-
-enum Colors {
-    white = '#fff',
-    black = '#000',
+interface User2 {
+    readonly name: string
+    age: number 
 }
 
-let white: Colors = Colors.white
-
-console.log(white)
-
-//type union 
-
-let age: number | string
-
-age = 20
-
-age = 'vinte'
-
-console.log(age)
-
-function showPet(pet: 'dog' | 'cat' | 'zebra'){
-    console.log(pet)
+let user2: User2 =  {
+    name: 'Luiz Osmar',
+    age: 23,
 }
 
-showPet('cat')
+user2.age = 24 
+//user2.name = 'Rafael Pereira' // read only can't be changed
 
-//type aliases
+// Extends, Implements
 
-type Pet = 'dog' | 'cat' | 'zebra'
-
-function displayPet(pet: Pet){
-    console.log(pet)
+interface Veiculo {
+    rodas: number
+    acelerar: () => void
+    frear: () => void
 }
 
-displayPet('zebra')
+interface Moto extends Veiculo { // Moto gets Veiculo property
+    capacete?: boolean // optional property
+    empinar?: () => void // optional method
+}
 
-//type Inference
+let bross: Moto
 
-let message2 = 'Cataline' // infere o tipo a partir da variável atribuída
-                          // infers the type depending on the variable inserted                  
-// window.addEventListener('click', (event) =>{
-//     console.log(event.target)
-// })
+//bross.acelerar // bross can use acelerar a Veiculo method
 
-//type Assertion
-const inputName = document.querySelector('#name') // if query  return null, variable null
-const inputName2 = document.querySelector('#name') as HTMLInputElement 
+class CriarVeiculo implements Veiculo, Moto{
+    rodas: number
 
-inputName2.value
+    constructor(rodas: number){
+        this.rodas = rodas
+    }
+     
+    acelerar(){
+        console.log('Vrummm')
+    }
+    frear(){
+        console.log('Irirrirriiiri')
+    }
+}
+
+// Pick & Omit
+
+interface Post {
+    id: number
+    title: string
+    description: string
+}
+
+type PostPreview = Pick<Post, 'id' | 'title'> // pick to postPreview chosen property
+
+type PostPreview2 = Omit<Post, 'id' | 'title'> // omit to postPreview chosen property
