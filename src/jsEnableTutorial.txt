@@ -1,0 +1,25 @@
+// how to enable JavaScript to be used with TypeScript
+// for my JavaScript files
+
+- First try
+1 - go to tsconfig.json
+2 - search "allowJs: true"
+3 - uncomment the line
+
+
+// how to enable JavaScript libraries to work with TypeScript
+
+- First try (Already have TS file)
+1 - Install the library
+2 - Try to use
+
+- Second try (Doesn't have TS file)
+1 - Install the library
+2 - Install the library using $ npm install @types/<libraryName> -D
+
+- Third try (Error with @types)
+1 - Install the library
+2 - Install $ npm install @types/node -D
+||
+2 - Create a file in the root project named "global.d.ts"
+3 - Write "declare module '<libraryName>'" // all types of the library will be 'any'
